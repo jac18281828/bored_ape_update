@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "resolveJsonModule": false,    
+    "inlineSourceMap": true,
+    "strict": true
+  },
+  "include": [
+    "src/**/*",
+    "package.json",
+  ]
+}

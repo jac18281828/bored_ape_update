@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
     "lib": ["esnext"],
-    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
     "esModuleInterop": true,
     "allowJs": true,
-    "resolveJsonModule": false,    
-    "inlineSourceMap": true,
+    "resolveJsonModule": false,
+    "sourceMap": true,
     "strict": true
   },
   "include": [

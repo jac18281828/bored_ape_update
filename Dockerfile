@@ -5,10 +5,9 @@ ARG PROJECT=bored_ape_update
 WORKDIR /workspaces/${PROJECT}
 
 COPY package.json .
+COPY package-lock.json .
+RUN npm i --save-dev
 RUN npm i
-RUN npm i eslint --global
-RUN npm i mocha @types/mocha chai @types/chai --global
-RUN npm i @types/node --global
 
 COPY .env .
 COPY .eslintrc .
@@ -18,6 +17,6 @@ COPY test test/
 
 RUN npm run eslint
 RUN npm run test
-RUN tsc
+RUN npm run build
 
-CMD npm start 
+CMD npm start

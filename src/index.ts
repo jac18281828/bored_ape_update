@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import { ActiveBook } from './book'
 import { Event, isAddingEvent, isRemovingEvent } from './event'
 import { EventRetriever } from './retriever'
-import dayToEpochMillis from './timeconversion'
+import dayToEpochSeconds from './timeconversion'
 import writeListings from './writecsv'
 
 dotenv.config();
@@ -10,14 +10,19 @@ dotenv.config();
 (async () => {
   const maximumDays: string | undefined = process.env.MAXIMUM_DAY
   const displayLimit: string | undefined = process.env.DISPLAY_LIMIT
-  const outputFile: string | undefined = process.env.OUTPUT_FILE
-  const auctionType: string | undefined = process.env.AUCTION_TYPE
   const collectionName: string | undefined = process.env.COLLECTION_NAME
   const apiUrl: string | undefined = process.env.API_URL
+  // apiKey is optional
   const apiKey: string | undefined = process.env.API_KEY
+  // auctionType is optional
+  const auctionType: string | undefined = process.env.AUCTION_TYPE
+  // outputFile is optional
+  const outputFile: string | undefined = process.env.OUTPUT_FILE
+
 
   if (!maximumDays || !collectionName || !apiUrl || !displayLimit) {
     console.log('Environment configuration is required.  Please review .env')
+    console.log('maximum history in days, display limit, collection name and api url are required fields')
     process.exit(1)
   }
 
@@ -28,8 +33,8 @@ dotenv.config();
 
   const activeBook = new ActiveBook()
 
-  const event = new EventRetriever(apiUrl, apiKey ? apiKey : '')
-  const afterTimestampSec = dayToEpochMillis(parseInt(maximumDays))
+  const event = new EventRetriever(apiUrl, apiKey)
+  const afterTimestampSec = dayToEpochSeconds(parseInt(maximumDays))
   const fetchPromise = event.fetch(collectionName, auctionType, afterTimestampSec, parseInt(displayLimit), (event: Event) => {
     if (isAddingEvent(event.eventType)) {
       activeBook.addListing(event)

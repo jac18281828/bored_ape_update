@@ -7,15 +7,15 @@ export default
   function writeListings(outputPath: string | undefined, activeListings: Event[], logConsole: boolean): Promise<void> {
   const writePromise = new Promise<void>((resolve, reject) => {
     const csvStream = format()
-    if(outputPath) {
+    if (outputPath) {
       const writeStream = fs.createWriteStream(outputPath)
       csvStream.pipe(writeStream)
     }
-    if(logConsole) {
+    if (logConsole) {
       csvStream.pipe(process.stdout)
     }
     activeListings.forEach(listing => {
-      csvStream.write([listing.tokenId, listing.price, listing.date, listing.eventType])
+      csvStream.write([listing.price, listing.tokenId, listing.date])
     })
 
     csvStream.on('error', () => reject())

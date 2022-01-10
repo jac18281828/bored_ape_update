@@ -36,11 +36,11 @@ export interface EventHandler {
 
 export class EventRetriever {
   apiUrl: string
-  apiKey: string
+  apiKey: string | undefined
 
   public constructor(
     apiUrl: string,
-    apiKey: string
+    apiKey: string | undefined
   ) {
     this.apiUrl = apiUrl
     this.apiKey = apiKey
@@ -62,8 +62,8 @@ export class EventRetriever {
 
   public fetch(collectionName: string, auctionType: string | undefined, afterTimestampEpochSec: number, displayLimit: number, eventHandler: EventHandler): Promise<void> {
     const eventPromise = new Promise<void>((resolve, reject) => {
-      const parameters = ['collection_slug=' + collectionName, 'only_opensea=false', 'limit=' + displayLimit, 'occurred_after=' + afterTimestampEpochSec ]
-      if(auctionType) {
+      const parameters = ['collection_slug=' + collectionName, 'only_opensea=false', 'limit=' + displayLimit, 'occurred_after=' + afterTimestampEpochSec]
+      if (auctionType) {
         parameters.push('auction_type=' + auctionType)
       }
       const resourceLocator = this.apiUrl + '?' + encodeURI(parameters.join('&'))
@@ -71,7 +71,7 @@ export class EventRetriever {
         Accept: 'application/json'
       }
 
-      if (this.apiKey && this.apiKey.length > 0) {
+      if (this.apiKey) {
         headers['X-API-KEY'] = this.apiKey
       }
 

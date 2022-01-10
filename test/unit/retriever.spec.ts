@@ -5,10 +5,10 @@ import { parseAsset } from '../../src/retriever'
 describe('parseAsset', function () {
     it('parseAsset CREATED', function () {
         const assetEvent = {
-            asset: {token_id: '1333'},
+            asset: { token_id: '1333' },
             starting_price: '0.0',
             created_date: '133',
-            total_price: undefined,            
+            total_price: undefined,
             event_type: 'created'
         }
         const event = parseAsset(assetEvent)
@@ -19,10 +19,10 @@ describe('parseAsset', function () {
     })
     it('parseAsset SUCCESSFUL', function () {
         const assetEvent = {
-            asset: {token_id: '1333'},
+            asset: { token_id: '1333' },
             starting_price: '0.0',
             created_date: '133',
-            total_price: undefined,            
+            total_price: undefined,
             event_type: 'successful'
         }
         const event = parseAsset(assetEvent)
@@ -33,10 +33,10 @@ describe('parseAsset', function () {
     })
     it('parseAsset token missing', function () {
         const assetEvent = {
-            asset: {token_id: undefined},
+            asset: { token_id: undefined },
             starting_price: '0.0',
             created_date: '133',
-            total_price: undefined,            
+            total_price: undefined,
             event_type: 'successful'
         }
         const event = parseAsset(assetEvent)
@@ -47,7 +47,7 @@ describe('parseAsset', function () {
             asset: undefined,
             starting_price: '0.0',
             created_date: '133',
-            total_price: undefined,            
+            total_price: undefined,
             event_type: 'successful'
         }
         const event = parseAsset(assetEvent)
@@ -55,7 +55,7 @@ describe('parseAsset', function () {
     })
     it('parseAsset event missing', function () {
         const assetEvent = {
-            asset: {token_id: '123'},
+            asset: { token_id: '123' },
             starting_price: '0.0',
             created_date: '133',
             total_price: undefined,
@@ -66,7 +66,7 @@ describe('parseAsset', function () {
     })
     it('parseAsset total price but not starting_price', function () {
         const assetEvent = {
-            asset: {token_id: '123'},
+            asset: { token_id: '123' },
             starting_price: undefined,
             total_price: '0.0',
             created_date: '133',
@@ -80,7 +80,7 @@ describe('parseAsset', function () {
     })
     it('parseAsset date missing', function () {
         const assetEvent = {
-            asset: {token_id: '123'},
+            asset: { token_id: '123' },
             starting_price: '100',
             total_price: '100',
             created_date: undefined,

@@ -6,8 +6,9 @@ describe('EventType adding or removing', function () {
         expect(isAddingEvent(EventType.CREATED)).to.equal(true)
     })
     it('Type is removing', function () {
+        expect(isRemovingEvent(EventType.APPROVE)).to.equal(true)
         expect(isRemovingEvent(EventType.CANCELLED)).to.equal(true)
         expect(isRemovingEvent(EventType.SUCCESSFUL)).to.equal(true)
-        expect(isRemovingEvent(EventType.TRANSFER)).to.equal(true)        
+        expect(isRemovingEvent(EventType.TRANSFER)).to.equal(true)
     })
 })
